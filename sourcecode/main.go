@@ -3,11 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"net"
 	"os"
 	"runtime"
 	"sync"
 	"time"
+
+	"github.com/fatih/color"
 )
 
 func isOpen(host string, port int, timeout time.Duration) bool {
@@ -26,13 +29,14 @@ func isOpen(host string, port int, timeout time.Duration) bool {
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	num := runtime.NumCPU()
-	fmt.Println("####Authored by lucifer11####")
-	fmt.Printf("[+]use max count %d cpu kernels to scan host ports...\n", num)
+	color.Yellow("####Authored by lucifer11####")
+	fmt.Printf("\n")
+	color.Blue("[+]use max count %d cpu kernels to scan host ports...\n", num)
 	time.Sleep(time.Second * 3)
 	fmt.Println(os.Args)
-	fmt.Printf("[+]args len is %d\n", len(os.Args))
+	color.Green("[+]args len is %d\n", len(os.Args))
 	if len(os.Args) == 1 {
-		fmt.Println("usage example：goportscan.exe -host baidu.com -start-port 1 -end-port 65535")
+		color.Cyan("usage example：goportscan.exe -host baidu.com -start-port 1 -end-port 65535")
 		os.Exit(0)
 	}
 	time.Sleep(time.Second * 2)
@@ -58,16 +62,26 @@ func main() {
 		}(port)
 	}
 	wg.Wait()
-	fmt.Println("------------------------------------")
-	fmt.Println("A Tcp Fast Port Scanner")
-	fmt.Println("------------------------------------")
+	flagtext, err := ioutil.ReadFile("flag.txt")
+	if err != nil {
+		panic(err.Error())
+	}
+	color.Red("------------------------------------")
 	fmt.Printf("\n")
-	fmt.Println("By Lucifer11")
-	fmt.Println("My QQ:1185151867")
-	fmt.Println("Blog: https://fdlucifer.github.io/")
-	fmt.Println("####################################")
+	color.Red("A Tcp Fast Port Scanner")
 	fmt.Printf("\n")
-	fmt.Printf("[+]target's opening ports: %v\n", ports)
+	color.Red("------------------------------------")
+	fmt.Printf("\n")
+	color.Red("%s", flagtext)
+	fmt.Printf("\n")
+	color.Red("My QQ:1185151867")
+	fmt.Printf("\n")
+	color.Red("Blog: https://fdlucifer.github.io/")
+	fmt.Printf("\n")
+	color.Red("####################################")
+	fmt.Printf("\n")
+	color.Blue("[+]target's opening ports: %v\n", ports)
 	e_time := time.Now().Unix()
-	fmt.Printf("[+]this scan used time: %d seconds\n", e_time-s_time)
+	color.Blue("[+]this scan used time: %d seconds\n", e_time-s_time)
+	color.Red("-------------scan over--------------")
 }
