@@ -55,7 +55,8 @@ D:\Go\testgofiles\oldboygo\day12\goportscan>goportscan.exe -allports y
 [+] [4399.com] Resolved address is [118.184.184.70]
 ```
 
-![](/pics/allports.jpg)
+ - ![](/pics/allports.jpg)
+
 
 ## 批量扫ip3389端口
 
@@ -81,7 +82,7 @@ D:\Go\testgofiles\oldboygo\day12\goportscan>goportscan.exe -start-port 3389 -end
 [+] iplist scan finished!
 ```
 
-![](/pics/singleport.jpg)
+ - ![](/pics/singleport.jpg)
 
 
 ### 优点特色
